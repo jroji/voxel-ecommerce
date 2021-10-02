@@ -47,6 +47,9 @@ export class HomeComponent implements OnInit {
       );
   }
 
+  public trackById(index: number, breed: Breed) {
+    return breed.id;
+  }
 
   ngOnDestroy() {
     this.clearSubscription$.next();

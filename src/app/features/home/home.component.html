@@ -8,7 +8,7 @@
   <voxel-card
     class="content__card"
     routerLink="detail"
-    *ngFor="let breed of breeds$ | async; trackBy:trackById"
+    *ngFor="let breed of breeds$ | async; trackBy: trackById"
     [title]=breed.name
     [description]=breed.description
     [image]="breed.image?.url || 'https://i.pinimg.com/originals/06/9e/9a/069e9a1b12466bd554a507c085f22782.jpg'"
