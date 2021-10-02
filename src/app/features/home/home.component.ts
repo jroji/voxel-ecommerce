@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Breed } from '@models/breed/breed.model';
 import { merge, Observable, of, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, mergeMap, scan, share, switchMap, takeUntil, tap, withLatestFrom } from 'rxjs/operators';
 import { BreedService } from './services/breed.service';
 
 @Component({
@@ -13,20 +13,49 @@ import { BreedService } from './services/breed.service';
 export class HomeComponent implements OnInit {
   /** Breed list to be rendered */
   public breeds$?: Observable<Breed[]>;
-  public searchInput = new FormControl();
+  public breeds?: Breed[] = [];
+  private requestData$: Subject<number> = new Subject();
+  public searchInput = new FormControl('');
 
   private readonly clearSubscription$: Subject<void> = new Subject();
+  private infiniteScrollObserver?: IntersectionObserver;
+
+  @ViewChild('anchor') anchor?: ElementRef<HTMLElement>;
 
   constructor(private breedService: BreedService) {}
 
   ngOnInit() {
-    const initialBreedsFetch$ = this.breedService.getBreeds();
-    const inputSearchBreeds$ = this.getInputSearch(initialBreedsFetch$);
+    const breedListFetch$ = this.getScrollingListData();
+    const inputSearchBreeds$ = this.getInputSearch(breedListFetch$);
 
     this.breeds$ = merge(
-      initialBreedsFetch$,
+      breedListFetch$,
       inputSearchBreeds$
     ).pipe(takeUntil(this.clearSubscription$))
+  }
+
+  ngAfterViewInit() {
+    this.observeAnchor();
+  }
+
+  private getScrollingListData() {
+    return this.requestData$
+      .pipe(
+        scan((totalPages, page) => totalPages + page, -1),
+        distinctUntilChanged(),
+        mergeMap((page) => this.breedService.getBreeds(page)),
+        share(),
+      )
+  }
+
+  private observeAnchor() {
+    if (!this.anchor) { return; }
+    this.infiniteScrollObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && this.searchInput.value === '') {
+        this.requestData$.next(1);
+      }
+    });
+    this.infiniteScrollObserver.observe(this.anchor.nativeElement);
   }
 
   private getInputSearch(initialFetch$: Observable<Breed[]>) {
@@ -47,6 +76,9 @@ export class HomeComponent implements OnInit {
       );
   }
 
+  public trackById(index: number, breed: Breed) {
+    return breed.id;
+  }
 
   ngOnDestroy() {
     this.clearSubscription$.next();
