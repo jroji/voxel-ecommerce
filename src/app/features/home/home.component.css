@@ -1,0 +1,20 @@
+/* src/app/features/home/home.component.css */
+:host {
+  padding: var(--ds-spacing);
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  margin: var(--ds-spacing);
+  width: 320px;
+}
+
+voxel-card /deep/ img {
+  height: 200px;
+  object-fit: cover;
+}

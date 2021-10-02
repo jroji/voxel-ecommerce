@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Breed } from '@models/breed/breed.model';
+import { BreedService } from './services/breed.service';
 
 @Component({
   selector: 'voxel-home',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  /** Breed list to be rendered */
+  public breeds: Breed[] = [];
 
-  constructor() { }
+  constructor(private breedService: BreedService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.breedService.getBreeds()
+      .subscribe((breeds: Breed[]) => this.breeds = breeds);
   }
-
 }

@@ -1,1 +1,10 @@
-<p>home works!</p>
+<voxel-card
+  class="card"
+  routerLink="detail"
+  *ngFor="let breed of breeds"
+  [title]=breed.name
+  [description]=breed.description
+  [image]="breed.image.url"
+  [isFeatured]="breed.energy_level === 5"
+  role="article"
+></voxel-card>
