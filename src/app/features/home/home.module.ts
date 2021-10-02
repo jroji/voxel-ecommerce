@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CardModule } from '@voxel-ui/card';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { CardModule } from '@voxel-ui/card';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     CardModule,
     HomeRoutingModule
   ],

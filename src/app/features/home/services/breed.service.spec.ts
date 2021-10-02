@@ -12,4 +12,18 @@ describe('BreedService', () => {
     spectator.service.getBreeds().subscribe();
     spectator.expectOne(`${BASE_URL}/breeds?limit=${DEFAULT_LIMIT}`, HttpMethod.GET);
   });
+
+  it('should not request breed data twice', () => {
+    const spy = jest.spyOn(spectator.httpClient, 'get');
+    spectator.service.getBreeds().subscribe();
+    spectator.service.getBreeds().subscribe();
+    spectator.expectOne(`${BASE_URL}/breeds?limit=${DEFAULT_LIMIT}`, HttpMethod.GET);
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should request search with the requested text', () => {
+    const searchTerm = 'test';
+    spectator.service.searchBreeds(searchTerm).subscribe();
+    spectator.expectOne(`${BASE_URL}/breeds/search?q=${searchTerm}`, HttpMethod.GET);
+  });
 });

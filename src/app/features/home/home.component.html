@@ -1,10 +1,18 @@
-<voxel-card
-  class="card"
-  routerLink="detail"
-  *ngFor="let breed of breeds"
-  [title]=breed.name
-  [description]=breed.description
-  [image]="breed.image.url"
-  [isFeatured]="breed.energy_level === 5"
-  role="article"
-></voxel-card>
+<header class="header" theme="dark">
+  <h1 class="header-title">Cat wiki</h1>
+  <p class="header-description">Search for cat breeds and know more</p>
+  <input class="header__search" [formControl]="searchInput">
+</header>
+
+<section class="content">
+  <voxel-card
+    class="content__card"
+    routerLink="detail"
+    *ngFor="let breed of breeds$ | async; trackBy:trackById"
+    [title]=breed.name
+    [description]=breed.description
+    [image]="breed.image?.url || 'https://i.pinimg.com/originals/06/9e/9a/069e9a1b12466bd554a507c085f22782.jpg'"
+    [isFeatured]="breed.energy_level === 5"
+    role="article"
+  ></voxel-card>
+</section>

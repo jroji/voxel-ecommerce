@@ -1,20 +1,40 @@
-/* src/app/features/home/home.component.css */
 :host {
-  padding: var(--ds-spacing);
+  max-width: 1200px;
+  margin: auto;
+  flex-direction: column;
+}
 
+.header {
+  background-color: var(--ds-layout-dark);
+  padding: calc(5 * var(--ds-spacing));
+  color: var(--ds-layout-bright);
+}
+
+.header__title {
+  margin-bottom: calc(4 * var(--ds-spacing));
+}
+
+.header__description {
+  margin-bottom: calc(2 * var(--ds-spacing));
+}
+
+
+.header__search {
+  border-radius: 16px;
+  border: none;
+  padding: 8px;
+  width: 280px;
+}
+
+
+.content {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  max-width: 1200px;
-  margin: auto;
+  padding: var(--ds-spacing);
 }
 
-.card {
+.content__card {
   margin: var(--ds-spacing);
   width: 320px;
-}
-
-voxel-card /deep/ img {
-  height: 200px;
-  object-fit: cover;
 }
