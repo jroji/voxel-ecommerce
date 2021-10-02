@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  padding: var(--ds-spacing, .5rem);
+  background: var(--ds-brand-color, #FFE588);
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  min-height: calc(6 * var(--ds-spacing));
+  background: var(--ds-layout-dark);
+}

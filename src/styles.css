@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* COLORS */
+  --dark-main: #26261F;
+  --ds-layout-bright: #F2F2F2;
+  --ds-brand-color: #FFE588;
+  --ds-secondary-color: #FF8686;
+  --ds-layout-dark: #595959;
+
+  /* TEXTS */
+  --ds-text-font-family: Red Hat Display, Helvetica, Arial;
+  --ds-text-text-size: 14px;
+  --ds-text-color: var(--dark-main);
+
+
+  --ds-title-font-family: Red Hat Display, Helvetica, Arial;
+  --ds-title-text-size: 18px;
+  --ds-title-color: var(--dark-main);
+
+  /* LAYOUT */
+  --ds-spacing: .5rem;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+p, a, span, label {
+  font-family: var(--ds-text-font-family);
+  font-size: var(--ds-text-text-size);
+  color: var(--ds-text-color);
+  margin:  var(--ds-spacing) 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ds-title-font-family);
+  font-size: var(--ds-title-text-size);
+  color: var(--ds-title-color);
+  margin: var(--ds-spacing) 0;
+}
+
+[theme="dark"] p, a, span, label {
+    color: var(--layout-bright);
+}
+[theme="dark"] h1, h2, h3, h4 {
+    color: var(--layout-bright);
+}
