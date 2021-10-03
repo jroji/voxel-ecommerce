@@ -1,7 +1,12 @@
-<img [src]="breed?.image?.url">
-<voxel-progress
-  data-testId="progress"
-  [max]=5
-  [value]=featureValue
-  *ngFor="let featureValue of progressFields"
-></voxel-progress>
+<img class="main-img" [src]="breed?.image?.url">
+<section class="info">
+  <h1>{{ breed?.name }}</h1>
+  <p>{{ breed?.description }}</p>
+  <voxel-progress
+    class="info__progress"
+    data-testId="progress"
+    [max]=5
+    [value]=featureValue
+    *ngFor="let featureValue of progressFields"
+  ></voxel-progress>
+</section>

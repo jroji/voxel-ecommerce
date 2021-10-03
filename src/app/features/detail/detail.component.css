@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+}
+
+.info {
+  padding: var(--ds-spacing);
+}
+.info__progress {
+  margin-bottom: var(--ds-spacing);
+}
+
+.main-img {
+  max-width: 50%;
+  object-fit: cover;
+  object-position: center center;
+}

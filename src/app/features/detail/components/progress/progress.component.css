@@ -1,5 +1,9 @@
+:host {
+  display: flex;
+}
+
 .group {
-  display: flex
+  display: flex;
 }
 
 .group__element {
