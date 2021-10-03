@@ -4,8 +4,7 @@ import { byRole } from '@ngneat/spectator/jest';
 import { CardComponent } from "@voxel-ui/card";
 import { MockComponent, ngMocks } from "ng-mocks";
 import { BreedService } from "./services/breed.service";
-import { AEGEAN, BREEDS } from "@models/breed/breed.mock";
-import { Breed } from "@models/breed/breed.model";
+import { BREEDS } from "@models/breed/breed.mock";
 import { BreedServiceStub } from "./services/breed.service.stub";
 import { RouterTestingModule } from "@angular/router/testing";
 import { DetailComponent } from "../detail/detail.component";
@@ -28,7 +27,7 @@ describe('HomeComponent', () => {
       // Helper de Angular para testing con rutas
       RouterTestingModule.withRoutes([
         {
-          path: 'detail',
+          path: 'detail/:id',
           component: MockComponent(DetailComponent)
         }
       ])
@@ -66,7 +65,7 @@ describe('HomeComponent', () => {
     const spectator = createComponent();
     spectator.click(byRole('article'));
     spectator.fixture.whenStable();
-    expect(spectator.inject(Location).path()).toBe('/detail');
+    expect(spectator.inject(Location).path()).toBe(`/detail/${BREEDS[0].id}`);
   });
 
   it('should request new breeds on input', fakeAsync(() => {

@@ -6,6 +6,9 @@ export class BreedServiceStub {
   getBreeds(): Observable<Breed[]> {
     return of(BREEDS);
   }
+  getBreed(): Observable<Breed> {
+    return of(AEGEAN);
+  }
   searchBreeds(): Observable<Breed[]> {
     return of([AEGEAN]);
   }

@@ -1,0 +1,15 @@
+.group {
+  display: flex
+}
+
+.group__element {
+  margin: 0 var(--ds-spacing);
+  background: var(--ds-layout-dark);
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.group__element[data-checked] {
+  background: var(--ds-brand-color);
+}

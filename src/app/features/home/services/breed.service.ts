@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Breed } from '@models/breed/breed.model';
+import { Breed, BreedImageResponse } from '@models/breed/breed.model';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 // Estos valores podemos sacarlos a archivo de environments
 export const BASE_URL = 'https://api.thecatapi.com/v1';
@@ -28,5 +28,18 @@ export class BreedService {
 
   searchBreeds(searchTerm: string): Observable<Breed[]> {
     return this.http.get(`${BASE_URL}/breeds/search?q=${searchTerm}`) as Observable<Breed[]>;
+  }
+
+  getBreed(breedId: string) {
+    return (this.http.get(`${BASE_URL}/images/search?breed_id=${breedId}`) as Observable<BreedImageResponse[]>)
+      .pipe(
+        map((response: BreedImageResponse[]) => {
+          const { breeds, ...image  } = response[0];
+          return {
+            ...breeds[0],
+            image
+          }
+        })
+      );
   }
 }

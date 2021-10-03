@@ -7,7 +7,7 @@
 <section class="content">
   <voxel-card
     class="content__card"
-    routerLink="detail"
+    [routerLink]="['detail', breed.id]"
     *ngFor="let breed of breeds$ | async; trackBy: trackById"
     [title]=breed.name
     [description]=breed.description

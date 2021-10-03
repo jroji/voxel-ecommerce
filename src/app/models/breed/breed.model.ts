@@ -39,6 +39,10 @@ export interface Breed {
   image: Image;
 }
 
+export interface BreedStringAccessor extends Breed {
+  [key: string]: unknown;
+}
+
 export interface Image {
   id: string;
   width: number;
@@ -49,4 +53,8 @@ export interface Image {
 export interface Weight {
   imperial: string;
   metric: string;
+}
+
+export interface BreedImageResponse extends Image {
+  breeds: Breed[];
 }

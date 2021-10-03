@@ -1,0 +1,8 @@
+<div role="group" class="group">
+  <div
+    class="group__element"
+    *ngFor="let element of list; let i = index"
+    data-testId="progress-element"
+    [attr.data-checked]="i < value || null"
+  ></div>
+</div>

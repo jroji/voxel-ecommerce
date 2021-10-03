@@ -1,1 +1,7 @@
-<p>detail works!</p>
+<img [src]="breed?.image?.url">
+<voxel-progress
+  data-testId="progress"
+  [max]=5
+  [value]=featureValue
+  *ngFor="let featureValue of progressFields"
+></voxel-progress>
