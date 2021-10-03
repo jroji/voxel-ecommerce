@@ -36,12 +36,13 @@ describe('BreedService', () => {
     spectator.expectOne(`${BASE_URL}/images/search?breed_id=${searchTerm}`, HttpMethod.GET);
   });
 
-  it('should return one Breed data', (done) => {
-    const response: BreedImageResponse[] = [{ breeds: [AEGEAN], width: 0, height: 0, url: '', id: 'a' }];
+  it('should return one Breed data with img', (done) => {
+    const response: BreedImageResponse[] = [{ breeds: [AEGEAN], width: 0, height: 0, url: 'testUrl', id: 'a' }];
     const searchTerm = 'beng';
     const spy = jest.spyOn(spectator.httpClient, 'get').mockReturnValue(of(response));
     spectator.service.getBreed(searchTerm).subscribe(data => {
       expect(data.id).toBe('aege');
+      expect(data.image.url).toBe('testUrl');
       done();
     });
   });
